@@ -1,34 +1,52 @@
-import React, {useState, useEffect} from 'react'
-import {exerciseOptions, FetchData} from './FetchData'
-
+import React, { useState } from 'react';
+import { exerciseOptions, FetchData } from './FetchData';
 
 function Searchbar() {
+  const [search, setSearch] = useState('');
+  const [exercises, setExercises] = useState([]);
 
-    const [search, setSearch] = useState('');
-    const [exerciseOptions, setExercises]= useState([]);
+  const handleSearch = async () => {
+    if (search.trim()) {
+      try {
+        const exerciseData = await FetchData(exerciseOptions);
 
-    
+        // Log the fetched data to understand its structure
+        console.log('Fetched exercise data:', exerciseData);
 
-    const handleSearch = async () => {
-        if (search){
-            const exerciseData = await FetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions)
+      
 
-            const searchedExercise = exerciseData.filter((exercise) =>  exercise.name.toLowerCase().includes(search)
-            || exercise.bodypart.toLowerCase().includes(search)
-            || exercise.target.toLowerCase().includes(search)
-            || exercise.equipment.toLowerCase().includes(search));
+        const searchedExercise = exerciseData.filter((exercise) =>
+          exercise.name.toLowerCase().includes(search.toLowerCase()) ||
+          exercise.bodyPart.toLowerCase().includes(search.toLowerCase()) ||
+          exercise.target.toLowerCase().includes(search.toLowerCase()) ||
+          exercise.equipment.toLowerCase().includes(search.toLowerCase())
+        );
 
-            setSearch('');
-            setExercises(searchedExercise);
-        }
+        console.log(searchedExercise);
+        setSearch('');
+        setExercises(searchedExercise);
+      } catch (error) {
+        console.error('Error during search:', error);
+      }
     }
-    return (
-        <div>
-            <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
-            <button onClick = {handleSearch}>Search</button>
-        </div>
-    );
+  };
 
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+      <ul>
+        {exercises.map((exercise, index) => (
+          <li key={index}>{exercise.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default Searchbar;

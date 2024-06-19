@@ -5,7 +5,7 @@ import Home from './Home'
 import Macros from './Macros' 
 import SignUp from './SignUp'
 import Workout from './Workout'
-import Searchbar from './Searchbar'
+
 
 
 
