@@ -6,20 +6,13 @@ function Searchbar() {
   const [exercises, setExercises] = useState([]);
 
   const handleSearch = async () => {
-    if (search.trim()) {
+    if (search) {
       try {
         const exerciseData = await FetchData(exerciseOptions);
 
-        // Log the fetched data to understand its structure
-        console.log('Fetched exercise data:', exerciseData);
-
-      
-
         const searchedExercise = exerciseData.filter((exercise) =>
-          exercise.name.toLowerCase().includes(search.toLowerCase()) ||
-          exercise.bodyPart.toLowerCase().includes(search.toLowerCase()) ||
-          exercise.target.toLowerCase().includes(search.toLowerCase()) ||
-          exercise.equipment.toLowerCase().includes(search.toLowerCase())
+          exercise.name.toLowerCase().includes(search)||
+          exercise.bodyPart.toLowerCase().includes(search)
         );
 
         console.log(searchedExercise);
@@ -42,7 +35,11 @@ function Searchbar() {
       <button onClick={handleSearch}>Search</button>
       <ul>
         {exercises.map((exercise, index) => (
-          <li key={index}>{exercise.name}</li>
+          <li key={index}>
+            <h3>{exercise.name}</h3>
+            
+            
+          </li>
         ))}
       </ul>
     </div>
