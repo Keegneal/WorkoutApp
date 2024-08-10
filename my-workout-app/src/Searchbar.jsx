@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { exerciseOptions, FetchData } from './FetchData';
+//import ReactPlayer from 'react-player';
 
 function Searchbar() {
   const [search, setSearch] = useState('');
@@ -10,9 +11,11 @@ function Searchbar() {
       try {
         const exerciseData = await FetchData(exerciseOptions);
 
+        console.log(exerciseData)
         const searchedExercise = exerciseData.filter((exercise) =>
-          exercise.name.toLowerCase().includes(search)||
-          exercise.bodyPart.toLowerCase().includes(search)
+          exercise.bodyPart.toLowerCase().includes(search)||
+          exercise.name.toLowerCase().includes(search)
+          
         );
 
         console.log(searchedExercise);
@@ -26,17 +29,19 @@ function Searchbar() {
 
   return (
     <div>
-      <input
+      <input className = "searchBar"
         type="text"
         placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
-      <ul>
+      <button className= "searchButton" onClick={handleSearch}>Search</button>
+      <ul className = "workoutContainer">
         {exercises.map((exercise, index) => (
-          <li key={index}>
+          <li className = "workoutCards" key={index}>
+            <img src={exercise.gifUrl}></img>
             <h3>{exercise.name}</h3>
+           
             
             
           </li>
@@ -47,3 +52,5 @@ function Searchbar() {
 }
 
 export default Searchbar;
+
+

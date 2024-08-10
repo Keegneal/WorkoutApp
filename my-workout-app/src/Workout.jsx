@@ -1,5 +1,6 @@
 import React from 'react'
 import Searchbar from './Searchbar'
+import './Workout.css'
 
  function Workout() {
   
