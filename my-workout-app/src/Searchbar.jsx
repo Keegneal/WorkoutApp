@@ -29,13 +29,18 @@ function Searchbar() {
 
   return (
     <div>
+
+      <div className='SearchBar'>
       <input className = "searchBar"
         type="text"
         placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      
+
       <button className= "searchButton" onClick={handleSearch}>Search</button>
+      </div>
       <ul className = "workoutContainer">
         {exercises.map((exercise, index) => (
           <li className = "workoutCards" key={index}>
