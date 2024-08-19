@@ -11,7 +11,7 @@ function Searchbar() {
       try {
         const exerciseData = await FetchData(exerciseOptions);
 
-        console.log(exerciseData)
+        
         const searchedExercise = exerciseData.filter((exercise) =>
           exercise.bodyPart.toLowerCase().includes(search)||
           exercise.name.toLowerCase().includes(search)

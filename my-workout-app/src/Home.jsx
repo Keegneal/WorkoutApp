@@ -4,7 +4,7 @@ import "./Home.css"
 function Home() {
     return (
         <div className= 'home-header'>
-            <h1> Welcome to My Workout App! </h1>
+            <h1> Welcome to FitFlow! </h1>
             <p> This app is designed to help you keep track of your workouts and exercises. </p>
         </div>
 
