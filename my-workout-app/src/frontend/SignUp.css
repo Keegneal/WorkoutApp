@@ -30,7 +30,7 @@
     padding: 0.5rem;    
     width: 50%;
     margin-left: 25%;
-    background-color: #ffffff;
+    background-color:rgb(159, 157, 250);
     ;
 
 }
@@ -45,8 +45,7 @@
     margin: 1rem;
     padding: 0.5rem;
     width: 50%;
-    background-color: #ffffff;
-    border: 0px solid #ffffff;
+    border: 0px solid rgb(159, 157, 250);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -74,7 +73,7 @@
     padding: 0.5rem;    
     width: 50%;
     margin-left: 25%;
-    background-color: #ffffff;
+    background-color: rgb(159, 157, 250);
     ;
 
 }
@@ -89,7 +88,7 @@
     margin: 1rem;
     padding: 0.5rem;
     width: 50%;
-    background-color: #ffffff;
+    background-color: rgb(159, 157, 250);
     border: 0px solid #ffffff;
     border-radius: 5px;
     cursor: pointer;

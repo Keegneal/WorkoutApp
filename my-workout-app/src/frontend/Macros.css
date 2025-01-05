@@ -12,7 +12,7 @@
     height: 50vh;
 }
 .macro-container h1{
-    padding-bottom: 100px;
+    padding-bottom: 5rem;
 }
 
 .macro-input-field{
@@ -23,5 +23,20 @@
     padding: 0 15px;
     font-size: 16px;
     margin-bottom: 20px;
+}
+.activity-button{
+    background-color: rgb(159, 157, 250);
+    border-radius: 10px;
+    border-style: none;
+    padding: 10px;
+    margin: 1rem;
+}
+.calc-button{
+    background-color: rgb(159, 157, 250);
+    border-radius: 10px;
+    border-style: none;
+    padding: 10px;
+    margin: 1rem;
+    
 }
 

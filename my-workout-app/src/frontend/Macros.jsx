@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import './Macros.css'
+import { Button, Modal } from 'react-bootstrap';
 
  function Macros() {
+  const[open, setOpen] = useState(false);
   const [weight, setWeight] = useState('');
   const [activity, setActivityLevel] = useState('');
   const [macros, setMacros] = useState(null);
@@ -21,7 +23,15 @@ import './Macros.css'
         fat: fatInGrams.toFixed(2),
         carbs: carbsInGrams.toFixed(2),
       });
+
+      setOpen(true);
   }
+
+  const handleClose= () =>{
+    setOpen(false);
+  }
+  
+ 
 
   return (
     <div>
@@ -38,12 +48,18 @@ import './Macros.css'
           <button className='activity-button' type="button" onClick={() => setActivityLevel(15)}>Moderate</button>
           <button className='activity-button' type="button" onClick={() => setActivityLevel(16)}>Active</button>
       </div>
-      <button type="submit">Calculate</button>
+      <button className= "calc-button" type="submit">Calculate</button>
     </form>
     </div>
+
+
+    <Modal show={open} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title> Recommended Macros</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
     {macros && (
       <div className='display-macros'>
-        <h2>Recommended Macros</h2>
         <p>Maintenance Calories: {macros.maintneceCals}</p>
         <p>Deficit Calories: {macros.deficitCals}</p>
         <p>Protein: {macros.protein}g</p>
@@ -51,7 +67,13 @@ import './Macros.css'
         <p>Carbohydrates: {macros.carbs}g</p>
       </div>
     )}
-  
+    </Modal.Body>
+    <Modal.Footer> 
+      <Button variant= "secondary" onClick ={handleClose}>
+        Close
+        </Button>
+      </Modal.Footer>
+  </Modal>
   </div>
 );
 
@@ -59,4 +81,4 @@ import './Macros.css'
 }
 
 
-export default Macros 
+export default Macros;
