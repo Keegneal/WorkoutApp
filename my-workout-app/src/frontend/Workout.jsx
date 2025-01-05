@@ -1,6 +1,6 @@
 import React from 'react'
-import Searchbar from './Searchbar'
-import './Workout.css'
+import Searchbar from '../frontend/Searchbar'
+import '../frontend/Workout.css'
 
  function Workout() {
   

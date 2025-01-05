@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { exerciseOptions, FetchData } from './FetchData';
+import { exerciseOptions, FetchData } from '../backend/FetchData';
 //import ReactPlayer from 'react-player';
 
 function Searchbar() {

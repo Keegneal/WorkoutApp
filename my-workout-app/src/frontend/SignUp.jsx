@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './SignUp.css'
+import '../frontend/SignUp.css'
 
 
 function SignUp() {
@@ -29,7 +29,7 @@ function SignUp() {
     <div>
         <div className = "login-container">
             {isLogin ? (
-                <>
+                <div className = "login-card">
                 <h1>Login</h1>
                 <form onSubmit={handleLogin}>
                     <div>
@@ -41,26 +41,28 @@ function SignUp() {
                     <button className= 'login-button'type="submit">Log In</button>
                 </form>
                 <button className='login-button' onClick={handleToggle}>Don't have an account? Sign Up here.</button>
-                </>
+                </div>
             ) : (
-                <>
-                <h1>Join Now</h1>
-                <form onSubmit={handleSubmit} >
-                    <div>
-                        <input className='input-field' value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder='Name' required/>
-                    </div>
-                    <div>
-                        <input className='input-field' value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' required/>
-                    </div>
-                    <div>
-                        <input className='input-field' value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' required/>
-                    </div>
+                <div>
+                    <div className="joinNow-card">
+                    <h1>Join Now</h1>
+                    <form onSubmit={handleSubmit} >
+                        <div>
+                            <input className='input-field' value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder='Name' required/>
+                        </div>
+                        <div>
+                            <input className='input-field' value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' required/>
+                        </div>
+                        <div>
+                            <input className='input-field' value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' required/>
+                        </div>
                     
-                    <button  className= 'login-button' type="submit">Join</button>
+                        <button  className= 'login-button' type="submit">Join</button>
                     
-                </form>  
-                <button className='login-button' onClick={handleToggle}>Already Have an Account? Login here.</button>
-                </>
+                    </form>  
+                    <button className='login-button' onClick={handleToggle}>Already Have an Account? Login here.</button>
+                    </div>
+                </div>
             )}
         </div>
     </div>

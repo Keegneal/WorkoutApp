@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Nav.css"; // Importing the CSS file
+import "../frontend/Nav.css"; // Importing the CSS file
 
 const Nav = () => {
     return (

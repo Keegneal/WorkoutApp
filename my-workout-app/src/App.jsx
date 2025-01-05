@@ -1,10 +1,10 @@
 import React from 'react'
 import{ BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Nav from './Nav'
-import Home from './Home'
-import Macros from './Macros' 
-import SignUp from './SignUp'
-import Workout from './Workout'
+import Nav from './frontend/Nav'
+import Home from './frontend/Home'
+import Macros from './frontend/Macros' 
+import SignUp from './frontend/SignUp'
+import Workout from './frontend/Workout'
 
 
 
