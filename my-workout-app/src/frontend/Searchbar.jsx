@@ -46,14 +46,19 @@ function Searchbar() {
           <li className = "workoutCards" key={index}>
             <img src={exercise.gifUrl}></img>
             <h3>{exercise.name}</h3>
-           
-            
-            
           </li>
         ))}
       </ul>
+
+      <footer>
+        <p>&copy; 2025 Workout App | All Rights Reserved</p>
+      </footer>
+
     </div>
+    
   );
+
+  
 }
 
 export default Searchbar;

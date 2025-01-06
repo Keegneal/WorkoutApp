@@ -36,19 +36,20 @@ import { Button, Modal } from 'react-bootstrap';
   return (
     <div>
     <div className='macro-container'>
-    <h1 >Calculate Your Recommended Macros</h1>
+    <h2 >Calculate Your Recommended Macros</h2>
     <form onSubmit={(e) => { e.preventDefault(); calculateMacros(); }}>
       <div className='macro-input-weight'>
           <input className= 'macro-input-field' type="number" placeholder= 'Weight (lbs)' value={weight} onChange={(e) => setWeight(e.target.value)} required />
         
       </div>
-      <div>
-          
+      <div className='button-container'>
+        <div className='activity-buttons'>
           <button className='activity-button' type="button" onClick={() => setActivityLevel(14)}>Sedentary</button>
           <button className='activity-button' type="button" onClick={() => setActivityLevel(15)}>Moderate</button>
           <button className='activity-button' type="button" onClick={() => setActivityLevel(16)}>Active</button>
       </div>
       <button className= "calc-button" type="submit">Calculate</button>
+      </div>
     </form>
     </div>
 
