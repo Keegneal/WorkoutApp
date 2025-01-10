@@ -23,7 +23,7 @@
     box-shadow: 0 8px 16px rgba(0, 225, 255, 0.3); /* Stronger shadow on hover */
 }
 
- .workoutCards img{
+.exercise-gif{
     width: 20rem;
     height: 20rem;
     padding: 15px;
@@ -54,7 +54,7 @@
 
 .searchBar{
     border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 25px;
     padding: 1rem;
     width: 25%;
@@ -78,11 +78,24 @@
     margin-left: 10px;
    
 }
+
+.searchBar:hover{
+    box-shadow: 0 8px 16px rgba(0, 225, 255, 0.3); /* Stronger shadow on hover */
+}
 .searchButton:hover {
     background-color: #4e80c2; /* Slightly darker on hover */
     transform: translateY(-2px); /* Subtle lift effect */
     box-shadow: 0 8px 16px rgba(0, 225, 255, 0.3); /* Stronger shadow on hover */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.save-icon{
+    width: 2.5rem;
+    height: 3rem;
+    filter: invert(0);
+}
+
+.save-icon:hover{
+    filter: invert(1);
 }
 
 h2 {

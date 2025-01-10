@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { exerciseOptions, FetchData } from '../backend/FetchData';
+import saveIcon from '../assets/saveIcon.png'
 //import ReactPlayer from 'react-player';
 
 function Searchbar() {
@@ -44,8 +45,9 @@ function Searchbar() {
       <ul className = "workoutContainer">
         {exercises.map((exercise, index) => (
           <li className = "workoutCards" key={index}>
-            <img src={exercise.gifUrl}></img>
+            <img src={exercise.gifUrl} className='exercise-gif'></img>
             <h3>{exercise.name}</h3>
+            <img src={saveIcon} className='save-icon'></img>
           </li>
         ))}
       </ul>
