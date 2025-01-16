@@ -3,6 +3,9 @@ const mysql= require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+
 
 
 const app = express();
@@ -10,14 +13,12 @@ app.use(cors());
 app.use(express.json());
 const port = 3001;
 
-app.use(cors());
-app.use(express.json());
 
 //MySQL connection
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'X9bw9xKf!',
+    password: process.env.DB_PASSWORD,
     database: 'my_workout_app'
   });
 

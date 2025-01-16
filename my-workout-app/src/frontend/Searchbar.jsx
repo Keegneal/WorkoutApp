@@ -14,6 +14,7 @@ function Searchbar() {
         
         const searchedExercise = exerciseData.filter((exercise) =>
           exercise.bodyPart.toLowerCase().includes(search)||
+          exercise.target.toLowerCase().includes(search)||
           exercise.name.toLowerCase().includes(search)
           
         );
