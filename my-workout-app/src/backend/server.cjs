@@ -1,8 +1,6 @@
 const express = require('express');
 const mysql= require('mysql2');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 require('dotenv').config//({path: require('path').resolve(__dirname, '../../.env')});
 
 
@@ -41,14 +39,4 @@ app.listen(port, () =>{
     console.log(`Server running on port ${port}`);
 })
 
-app.get('/my_workout_app',(req,res)=> {
-
-  db.query('SELECT 1+1 AS solution', (err, results) =>{
-    if(err){
-      return res.status(500).json({error:err});
-    }
-    res.json({result: results[0].solution})
-  })
-
-})
 
