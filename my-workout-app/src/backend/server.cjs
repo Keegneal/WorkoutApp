@@ -3,7 +3,7 @@ const mysql= require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+require('dotenv').config//({path: require('path').resolve(__dirname, '../../.env')});
 
 
 
@@ -21,6 +21,16 @@ const db = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: 'my_workout_app'
   });
+
+db.getConnection((err, connection) => {
+  if(err){
+    console.error('Error connecting to MySQL:', err);
+    return;
+  }
+  console.log('Connected to MySQL');
+  connection.release();
+});
+
 
   app.get('/', (req, res) => {
     res.send('Hello from Express + MySQL backend!');

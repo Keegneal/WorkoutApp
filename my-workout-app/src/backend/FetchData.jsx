@@ -6,7 +6,7 @@ export const exerciseOptions = {
   method: 'GET',
   url: 'https://exercisedb.p.rapidapi.com/exercises',
   headers: {
-    'x-rapidapi-key': '496c6ba404msh54fab30678ef0fdp15dd42jsn552c6fe10338',//import.meta.env.VITE_APP_RAPID_API_KEY,
+    'x-rapidapi-key': import.meta.env.VITE_APP_RAPID_API_KEY,
     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
   },
   params:{

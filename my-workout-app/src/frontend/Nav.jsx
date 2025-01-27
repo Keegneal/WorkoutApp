@@ -7,13 +7,13 @@ const Nav = () => {
         
             <nav className = "nav-bar"> 
                 <ul>
-                    <li> <Link to = "/"> Home </Link> </li>
-                    <li> <Link to = "/Macros"> Macros</Link> </li>
-                    <li> <Link to = "/Workout"> Workouts  </Link> </li>
-                    <li> <Link to = "/SignUp"> Sign Up  </Link> </li>
-
-
+                    <li className="nav-pages"> <Link to = "/"> Home </Link> </li>
+                    <li className="nav-pages"> <Link to = "/Macros"> Macros</Link> </li>
+                    <li className="nav-pages"> <Link to = "/Workout"> Workouts  </Link> </li>
+                    <li className="nav-pages"> <Link to = "/SignUp"> Sign Up  </Link> </li>
+                    <li className="user-profile"> <Link to ="/">  Profile </Link> </li>
                 </ul>            
+                
             </nav>
 
         
