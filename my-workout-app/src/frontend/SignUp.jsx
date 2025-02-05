@@ -11,10 +11,57 @@ function SignUp() {
     const[loginEmail, setLoginEmail] = useState('');
     const[loginPassword, setLoginPassword] = useState('');
 
-    const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(loginEmail, loginPassword);
+    const handleSignup = async(e) =>{
+        e.preventDefault();
+        try{
+            const response = await fetch('http://localhost:3001/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password, name}),
+            });
+        
+
+        const data = await response.json();
+            if(response.ok){
+                setSuccessMessage('Signup successful. Now login.')
+                setErrorMessage('')
+                setIsLogin(true);
+            }
+            else{
+                setErrorMessage(data.message || 'Signup failed')
+            }
+        }
+        catch (error){
+            setErrorMessage('Error occured')
+        }
     }
+
+
+    const handleLogin = async (e) => {
+    e.preventDefault();
+    try{
+    const response = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email: loginEmail, password: loginPassword}),
+    });
+
+    
+    const data = await response.json();
+    if(response.ok){
+        localStorage.setItem('token', data.token);
+        console.log('Login successful');
+    } else {
+        console.error('Login failed:', data.message);
+    }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +71,8 @@ function SignUp() {
     const handleToggle = () => {
         setIsLogin(!isLogin);
     }
+
+
 
   return (
     <div>
