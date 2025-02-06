@@ -10,6 +10,8 @@ function SignUp() {
 
     const[loginEmail, setLoginEmail] = useState('');
     const[loginPassword, setLoginPassword] = useState('');
+    const[successMessage, setSuccessMessage] = useState('');
+    const[errorMesssage, setErrorMessage] = useState('');
 
     const handleSignup = async(e) =>{
         e.preventDefault();
@@ -63,11 +65,6 @@ function SignUp() {
     }
 }
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email, password);
-    }
-
     const handleToggle = () => {
         setIsLogin(!isLogin);
     }
@@ -95,7 +92,7 @@ function SignUp() {
                 <div>
                     <div className="joinNow-card">
                     <h1>Join Now</h1>
-                    <form onSubmit={handleSubmit} >
+                    <form onSubmit={handleSignup} >
                         <div>
                             <input className='input-field' value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder='Name' required/>
                         </div>

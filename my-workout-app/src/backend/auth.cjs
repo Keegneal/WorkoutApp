@@ -19,7 +19,7 @@ router.post('/signup', async(req, res) => {
                 return res.status(500).json({ message: 'Database error' });
             }
 
-            if (results.length > 0) {
+            if (results.length === 0) {
                 return res.status(400).json({ message: 'Email already exists' });
             }
 
@@ -46,29 +46,31 @@ router.post('/signup', async(req, res) => {
     }
 });
 
-router.post('/login', async(req,res)=>{
-    const{email,password} = req.body;
-
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
     const findUserQuery = 'SELECT * FROM users WHERE email = ?';
-    db.query(findUserQuery, [email], async(err, results) => {
-        if(err){
-            console.error('Error finding user:', err);
-            return res.status(500).json({message: 'DB server error'});
+    
+    try {
+        // Using the promise-based query; this returns an array [rows, fields]
+        const [results] = await db.query(findUserQuery, [email]);
+        
+        if (results.length === 0) {
+            return res.status(400).json({ message: 'User not found' });
         }
         
-    })
-    if(results.length === 0){
-        return res.status(400).json({message: 'User not found'});
+        const user = results[0];
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(400).json({ message: 'Invalid password' });
+        }
+    
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        return res.status(200).json({ token });
+    } catch (err) {
+        console.error('Error during login:', err);
+        return res.status(500).json({ message: 'DB server error' });
     }
+});
 
-    const user = results[0];
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if(!passwordMatch){
-        return res.status(400).json({message: 'Invalid password'});
-    }
-
-    const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: '1h'});
-    return res.status(200).json({token});
-})
 
 module.exports = router;
