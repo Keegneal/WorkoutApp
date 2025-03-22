@@ -20,6 +20,27 @@ console.log('Environment check:', {
 
 const db = require('./dbConfig.cjs');
 
+const authenticateToken = (req, res, next) => {
+    try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).json({ message: 'No token provided' });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+            if (err) {
+                return res.status(403).json({ message: 'Invalid token' });
+            }
+            req.user = user;
+            next();
+        });
+    } catch (error) {
+        return res.status(500).json({ message: 'Authentication error' });
+    }
+};
+
 router.post('/signup', async (req, res) => {
     console.log("🔹 Received Signup Request:", req.body);
     const { email, password, name } = req.body;
@@ -91,5 +112,33 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/user', authenticateToken, async (req, res) => {
+    try {
+        console.log('1. User from token:', req.user);
+        console.log('2. Looking for userId:', req.user.userId);
+
+        const [results] = await db.query(
+            'SELECT name, email FROM users WHERE id = ?',
+            [req.user.userId]
+        );
+        
+        console.log('3. Database results:', results);
+
+        if (results.length > 0) {
+            const userData = {
+                name: results[0].name,
+                email: results[0].email
+            };
+            console.log('4. Sending back:', userData);
+            res.json(userData);
+        } else {
+            console.log('5. No user found for ID:', req.user.userId);
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('6. Error in /user route:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 module.exports = router;

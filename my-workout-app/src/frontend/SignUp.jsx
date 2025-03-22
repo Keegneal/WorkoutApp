@@ -48,18 +48,20 @@ function SignUp() {
     const handleLogin = async (e) => {
     e.preventDefault();
     try{
-    const response = await fetch('http://localhost:3001/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({email: loginEmail, password: loginPassword}),
-    });
+        const response = await fetch('http://localhost:3001/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email: loginEmail, password: loginPassword}),
+        });
 
         const data = await response.json();
+        console.log('Full login response:', data);
+        
         if(response.ok){
             localStorage.setItem('token', data.token);
-            console.log('Login successful');
+            localStorage.setItem('userData', JSON.stringify({ email: loginEmail }));
             navigate('/profile');
         } else {
             console.error('Login failed:', data.message);
