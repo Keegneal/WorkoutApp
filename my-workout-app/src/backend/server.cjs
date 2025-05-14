@@ -17,6 +17,11 @@ const port = 3001;
   app.get('/', (req, res) => {
     res.send('Hello from Express + MySQL backend!');
   });
+
+  app.get('/saved_exercises', (req,res)=>{
+
+    const {exercise} =req.body
+  })
   
 
 app.listen(port, () =>{

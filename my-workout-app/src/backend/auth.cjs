@@ -141,4 +141,48 @@ router.get('/user', authenticateToken, async (req, res) => {
     }
 });
 
+router.post('/save_exercises', authenticateToken, async (req, res) => {
+    const {exercise} = req.body;
+    const user_id = req.user.userId;
+
+    try{
+        const [existingUsers] = await db.query(
+            'SELECT id FROM exercises WHERE name = ? AND target = ? AND bodyPart = ?',
+            [exercise.name, exercise.target, exercise.bodyPart]
+        )
+
+        let exerciseId;
+
+        if(existingUsers.length > 0){
+            exerciseId = existingUsers[0].id
+        }
+        else{
+            const[insertResult] = await db.query(
+                'INSERT INTO exercises (name, bodyPart, gifUrl, target) VALUES (?,?,?,?)',
+                [exercise.name,exercise.bodyPart, exercise.gifUrl,exercise.target]
+            )
+            exerciseId = insertResult.insertId;
+        } 
+
+        const [alreadySaved] = await db.query(
+            'SELECT * FROM saved_exercises WHERE user_id = ? and exercise_id = ?',
+            [user_id, exerciseId]
+        )
+         if(alreadySaved.length > 0){
+            return res.status(400).json({message: 'Exercise already saved'})
+         }
+
+         await db.query(
+            'INSERT INTO saved_exercises (user_id, exercise_id) VALUES (?,?)',
+            [user_id, exerciseId]
+         )
+         res.status(200).json({message: "Success! Exercise saved!"})
+    }
+    catch(error){
+        console.error('Error saving exercises:', error)
+        res.status(500).json({message: 'Failed to save exercises'})
+    }
+})
+
+
 module.exports = router;

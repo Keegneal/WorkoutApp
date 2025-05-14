@@ -29,6 +29,39 @@ function Searchbar() {
     }
   };
 
+  const handleSave = async(exercise) =>{
+    const token  = localStorage.getItem('token')
+    if(!token){
+      alert("please login to save workouts!")
+      return
+    }
+
+    try{
+      const response = await fetch('http://localhost:3001/auth/save_exercises',{
+
+        method: 'POST',
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({exercise})
+      })
+
+      const data = await response.json()
+      
+      if(response.ok){
+        alert('Worout saved!')
+      }
+      else{
+        alert(`Failed to save workout ${data.message}`)
+      }
+    }
+    catch(err){
+      console.error('Save error', err)
+      alert('Error saving workout')
+    }
+  }
+
   return (
     <div>
 
@@ -48,7 +81,7 @@ function Searchbar() {
           <li className = "workoutCards" key={index}>
             <img src={exercise.gifUrl} className='exercise-gif'></img>
             <h3>{exercise.name}</h3>
-            <img src={saveIcon} className='save-icon'></img>
+            <img src={saveIcon} className='save-icon' onClick={()=> handleSave(exercise)}/>
           </li>
         ))}
       </ul>
