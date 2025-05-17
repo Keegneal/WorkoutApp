@@ -6,6 +6,7 @@ import './Profile.css'
 function Profile(){
     const[userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
+    const [displaySavedWorkouts, setSavedDisplayWorkouts] = useState([]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -45,6 +46,33 @@ function Profile(){
         fetchUserData();
     }, []);
 
+    useEffect(()=>{
+        const fetchSaved = async () =>{
+            try {
+                const token = localStorage.getItem('token')
+
+                if(!token){
+                    setError("No Saved Workouts")
+                    return
+                }
+
+                const response = await fetch('http://localhost:3001/auth/saved_workouts',{
+                    headers:{
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json()
+                setSavedDisplayWorkouts(data)
+                 
+            }
+            catch (err){
+                console.error('Error loading saved exercises', err)
+            }
+        }
+        fetchSaved();
+    }, [])
+
     if (error) {
         return <div>{error}</div>;
     }
@@ -60,7 +88,24 @@ function Profile(){
             <h3> {userData.name}'s  Workouts</h3>
             
             {/* Add other user data fields */}
+
+
+            <div>
+            <h3> Saved Workouts</h3>
+            <ul>
+                {displaySavedWorkouts.map((exercise,index)=>
+                <li key= {index}>
+                    <h4>{exercise.name}</h4>
+                    <img src = {exercise.gifUrl}/>
+                    <p></p>
+                </li>
+            )}
+            </ul>
+            </div>
         </div>
+
+
+        
     )
 }
 export default Profile;
