@@ -58,7 +58,8 @@ function Profile(){
 
                 const response = await fetch('http://localhost:3001/auth/saved_workouts',{
                     headers:{
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        //'Content-Type': 'application/json'
                     }
                 });
 
@@ -86,22 +87,20 @@ function Profile(){
             <h1>{userData.name}'s Profile</h1>
 
             <h3> {userData.name}'s  Workouts</h3>
-            
-            {/* Add other user data fields */}
-
-
+        
             <div>
             <h3> Saved Workouts</h3>
             <ul>
                 {displaySavedWorkouts.map((exercise,index)=>
                 <li key= {index}>
-                    <h4>{exercise.name}</h4>
+                    <h4>help{exercise.name}</h4>
                     <img src = {exercise.gifUrl}/>
                     <p></p>
                 </li>
             )}
             </ul>
             </div>
+
         </div>
 
 

@@ -184,5 +184,32 @@ router.post('/save_exercises', authenticateToken, async (req, res) => {
     }
 })
 
+router.get('/saved_workouts', authenticateToken, async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const [results] = await db.query(
+      `SELECT exercises.name, exercises.bodyPart, exercises.gifUrl, exercises.target
+       FROM saved_exercises
+       JOIN exercises ON saved_exercises.exercise_id = exercises.id
+       WHERE saved_exercises.user_id = ?`,
+      [userId]
+    );
+
+    res.status(200).json(results);
+  } catch (error) {
+    if (!response.ok) {
+  const text = await response.text();
+  throw new Error(`Fetch failed: ${response.status} - ${text}`);
+}
+const data = await response.json();
+
+
+    console.error('Error fetching saved workouts:', error);
+    res.status(500).json({ message: 'Failed to fetch saved workouts' });
+
+  }
+});
+
 
 module.exports = router;

@@ -18,10 +18,7 @@ const port = 3001;
     res.send('Hello from Express + MySQL backend!');
   });
 
-  app.get('/saved_exercises', (req,res)=>{
 
-    const {exercise} =req.body
-  })
   
 
 app.listen(port, () =>{
